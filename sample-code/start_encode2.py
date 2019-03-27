@@ -56,7 +56,7 @@ def start_encode():
     :return: client object
   """
 
-  client = qencode.client(API_KEY, api_url='https://api-qa.qencode.com/')
+  client = qencode.client(API_KEY)
   if client.error:
     print('Error', client.message, sep=":", end="\n")
     raise SystemExit
