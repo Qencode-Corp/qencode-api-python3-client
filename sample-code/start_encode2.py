@@ -8,7 +8,8 @@ import qencode
 import time
 import json
 
-API_KEY = '5a5db6fa5b4c5'
+#replace with your API KEY (can be found in your Project settings on Qencode portal)
+API_KEY = '5a5db6fa5b123'
 
 params = qencode.custom_params()
 
@@ -17,10 +18,11 @@ STREAM = qencode.stream()
 DESTINATION = qencode.destination()
 VIDEO_CODEC = qencode.x264_video_codec()
 
-
-DESTINATION.url = "s3://s3-eu-west-2.amazonaws.com/qencode-test"
-DESTINATION.key = "AKIAIKZIPSJ7SDAIWK4A"
-DESTINATION.secret = "h2TGNXeT49OT+DtZ3RGr+94HEhptS6oYsmXCwWuL"
+# set your S3 access credentials here
+# for more storage types see Destination object description: https://docs.qencode.com/#010_050
+DESTINATION.url = "s3://s3.eu-east-1.amazonaws.com/qencode-test"
+DESTINATION.key = "AKIAIKASDJ7SD12345"
+DESTINATION.secret = "h2TGNXeQA9OT+DtZ3RGr+94HEhptS6oYsm12345"
 
 VIDEO_CODEC.vprofile = "baseline"
 VIDEO_CODEC.level = 31
@@ -29,6 +31,8 @@ VIDEO_CODEC.flags2 = "-bpyramid+fastpskip-dct8x8"
 VIDEO_CODEC.partitions = "+parti8x8+parti4x4+partp8x8+partb8x8"
 VIDEO_CODEC.directpred = 2
 
+# stream object is specified for HLS or DASH outputs only.
+# for MP4 or WEBM output set properties below in format object directly
 STREAM.profile = "baseline"
 STREAM.size = "1920x1080"
 STREAM.audio_bitrate = 128

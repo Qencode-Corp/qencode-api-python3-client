@@ -8,12 +8,14 @@ import qencode
 import time
 import json
 
+#replace with your API KEY (can be found in your Project settings on Qencode portal)
+API_KEY = '5a5db6fa5b123'
 
-API_KEY = '5a5db6fa5b4c5'
-TRANSCODING_PROFILEID = '5a5db6fa5b8ac'
-VIDO_URL = 'https://qa.qencode.com/static/1.mp4'
+#replace with your Transcoding Profile ID (can be found in your Project settings on Qencode portal)
+TRANSCODING_PROFILEID = '5a5db6fa5b123'
 
-
+#replace with a link to your input video
+VIDEO_URL = 'https://qa.qencode.com/static/1.mp4'
 
 
 def start_encode():
@@ -37,7 +39,7 @@ def start_encode():
   task = client.create_task()
   task.start_time = 0.0
   task.duration = 10.0
-  task.start(TRANSCODING_PROFILEID, VIDO_URL)
+  task.start(TRANSCODING_PROFILEID, VIDEO_URL)
   if task.error:
     print('Error', task.message, sep=":", end="\n")
     raise SystemExit
