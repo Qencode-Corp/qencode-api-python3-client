@@ -1,4 +1,4 @@
-## qencode-api-python-client
+## qencode-api-python3-client
 
 ####Installation
 

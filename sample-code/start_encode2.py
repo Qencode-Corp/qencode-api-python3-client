@@ -52,7 +52,7 @@ def start_encode():
     Create client object
     :param api_key: string. required
     :param api_url: string. not required
-    :param api_version: int. not required. default 'v1'
+    :param api_version: string. not required. default 'v1'
     :return: client object
   """
 

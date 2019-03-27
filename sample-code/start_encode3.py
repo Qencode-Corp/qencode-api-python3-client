@@ -44,10 +44,11 @@ def print_status(status):
 
 def start_encode():
   """
-    Create encoder object
-    :param api_key: string
+    Create client object
+    :param api_key: string. required
     :param api_url: string. not required
-    :return: encode object
+    :param api_version: string. not required. default 'v1'
+    :return: client object
   """
   client = qencode.client(API_KEY)
   if client.error:
@@ -56,8 +57,6 @@ def start_encode():
 
   """
     Create task
-    :param access_token: string. access_token from encoder object
-    :param connect: string. connect object from encoder object
     :return: task object
   """
   task = client.create_task()
