@@ -4,7 +4,7 @@
 
 ````
 cd your-workspace-folder
-git clone https://github.com/qencode-dev/qencode-api-python-client
+git clone https://github.com/qencode-dev/qencode-api-python3-client
 cd qencode-api-python-client
 pip install -r requirements.txt
 python setup.py install
@@ -13,5 +13,5 @@ python setup.py install
 **install from pip**
 
 ````
-sudo pip install qencode
+sudo pip install qencode3
 ````
