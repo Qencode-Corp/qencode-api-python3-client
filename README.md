@@ -14,7 +14,7 @@ python setup.py install
 **install from pip**
 
 ````
-sudo pip install qencode
+sudo pip install qencode3
 ````
 
 ##Usage
