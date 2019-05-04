@@ -1,5 +1,6 @@
 import sys
 import logging
+import json
 
 def is_number(s):
   try:
@@ -13,16 +14,31 @@ def get_percent(p):
     return round(p)
   return 0
 
-def rm_key_if_null_2(class_obj):
-  # for python 2.x
-  for key, val in class_obj.__dict__.items():
-    if not val:
-      class_obj.__dict__.pop(key)
+def is_json(value):
+  try:
+    json.loads(value)
+  except ValueError:
+    return False
+  return True
 
-def rm_key_if_null(class_obj):
+def rm_attributes_if_null(class_obj):
   for key, val in class_obj.__dict__.copy().items():
     if not val:
       class_obj.__dict__.pop(key)
+
+def rm_key_if_null(obj):
+  if isinstance(obj, dict):
+    return _rm_key(obj)
+  elif isinstance(obj, str):
+    res = _rm_key(json.loads(obj))
+    return json.dumps(res)
+
+def _rm_key(_dict):
+  for key, val in _dict.copy().items():
+    if not val:
+      _dict.pop(key)
+  return _dict
+
 
 def progress_bar(self, custom_message=None):
   message = custom_message if custom_message else ''

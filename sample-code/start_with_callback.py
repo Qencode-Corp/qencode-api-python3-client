@@ -5,9 +5,10 @@ import sys
 import os.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 import qencode3
-import time
 import json
-from  qencode3 import QencodeClientException, QencodeTaskException
+from qencode3 import QencodeClientException, QencodeTaskException
+
+
 
 #replace with your API KEY (can be found in your Project settings on Qencode portal)
 API_KEY = 'your-api-qencode-key'
@@ -17,6 +18,16 @@ TRANSCODING_PROFILEID = 'your-qencode-profile-id'
 
 #replace with a link to your input video
 VIDEO_URL = 'https://qa.qencode.com/static/1.mp4'
+
+
+def progress_changed_handler(status):
+  if status['status'] != 'completed':
+    print(json.dumps(status, indent=2, sort_keys=True))
+
+
+def task_completed_handler(status, task_token):
+  print('Completed task: {0}'.format(task_token))
+  print(json.dumps(status, indent=2, sort_keys=True))
 
 
 def start_encode():
@@ -48,16 +59,10 @@ def start_encode():
 
   print('Start encode. Task: {0}'.format(task.task_token))
 
-  line = "-"*80
-  while True:
-    print(line)
-    status = task.status()
-    # print status
-    print(json.dumps(status, indent=2, sort_keys=True))
-    if status['error'] or status['status'] == 'completed':
-      break
-    time.sleep(5)
+  # using callback methods
+  task.progress_changed(progress_changed_handler)
+  task.task_completed(task_completed_handler, task.task_token)
 
 
 if __name__ == '__main__':
-  start_encode()
+   start_encode()

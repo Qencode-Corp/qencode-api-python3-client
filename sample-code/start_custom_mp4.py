@@ -7,19 +7,32 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.
 import qencode3
 import time
 import json
-from  qencode3 import QencodeClientException, QencodeTaskException
+from qencode3 import QencodeClientException, QencodeTaskException
 
 #replace with your API KEY (can be found in your Project settings on Qencode portal)
 API_KEY = 'your-api-qencode-key'
 
-#replace with your Transcoding Profile ID (can be found in your Project settings on Qencode portal)
-TRANSCODING_PROFILEID = 'your-qencode-profile-id'
+params = qencode3.custom_params()
+
+FORMAT = qencode3.format()
+DESTINATION = qencode3.destination()
+
+# set your S3 access credentials here
+# for more storage types see Destination object description: https://docs.qencode.com/#010_050
+DESTINATION.url = "s3://s3-eu-west-2.amazonaws.com/qencode-test"
+DESTINATION.key = "your-s3-key"
+DESTINATION.secret = "your-s3-secret"
+
+FORMAT.size = "320x240"
+FORMAT.output = "mp4"
+FORMAT.destination = DESTINATION
 
 #replace with a link to your input video
-VIDEO_URL = 'https://qa.qencode.com/static/1.mp4'
-
+params.source = 'https://qa.qencode.com/static/1.mp4'
+params.format = [FORMAT]
 
 def start_encode():
+
   """
     Create client object
     :param api_key: string. required
@@ -35,13 +48,11 @@ def start_encode():
   print('The client created. Expire date: {0}'.format(client.expire))
 
   task = client.create_task()
-  task.start_time = 0.0
-  task.duration = 10.0
 
   if task.error:
     raise QencodeTaskException(task.message)
 
-  task.start(TRANSCODING_PROFILEID, VIDEO_URL)
+  task.custom_start(params)
 
   if task.error:
     raise QencodeTaskException(task.message)
@@ -57,7 +68,6 @@ def start_encode():
     if status['error'] or status['status'] == 'completed':
       break
     time.sleep(5)
-
 
 if __name__ == '__main__':
   start_encode()
