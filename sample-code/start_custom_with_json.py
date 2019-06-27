@@ -15,7 +15,7 @@ API_KEY = 'your-api-qencode-key'
 #replace with a link to your input video
 params = """
 {"query": {
-  "source": "https://qa.qencode.com/static/1.mp4",
+  "source": "https://qencode.com/static/1.mp4",
   "format": [
     {
       "output": "mp4",
