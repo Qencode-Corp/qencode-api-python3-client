@@ -53,7 +53,10 @@ class Task(object):
       self._create_task(1)
 
     if not self.error:
-      data = self._prepare_data_custom(self._prepare_query(data), **kwargs)
+      query = self._prepare_query(data)
+
+      if not self.error:
+        data = self._prepare_data_custom(query, **kwargs)
 
     if not self.error and self.task_token:
       self._start_encode('start_encode2', data)
@@ -122,10 +125,18 @@ class Task(object):
       query = rm_key_if_null(params)      
       return json.dumps(query)
     
-    if isinstance(params, str):
+    if isinstance(params, (str, bytes)):
       if is_json(params):
         query = rm_key_if_null(params)
         return query
+      else:
+        self.error = True
+        try:
+          self.message = "JSON is not well formatted: {0} Is not defined".format(params)
+        except Exception as e:
+          pass
+        finally:
+          self.message = "JSON is not well formatted"
 
   def _prepare_data_custom(self, query_json, **kwargs):
     data = dict(
