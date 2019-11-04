@@ -29,7 +29,8 @@ class Http(object):
       response = dict(error=True, message='Error: {0}'.format(e))
       response = json.dumps(response)
     else:
-      response = res.read()
+      res2 = res.read()
+      response = res2 if isinstance(res2, str) else res2.decode('utf-8')      
     return response
 
   def request(self, api_name, data):
