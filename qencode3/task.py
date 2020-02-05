@@ -10,6 +10,7 @@ class Task(object):
   def __init__(self, access_token, connect, debug=False, **kwargs):
     self.connect = connect
     self.status_url = None
+    self.main_status_url = '{0}/{1}/status'.format(self.connect.url, self.connect.version)
     self.task_token = None
     self.upload_url = None
     self.access_token = access_token
@@ -166,33 +167,43 @@ class Task(object):
 
   def _start_encode(self, api_name, data):
     res = self.connect.request(api_name, data)
-    if not res['error']:
-      self.status_url = res.get('status_url')
+    if not res['error'] and res.get('status_url'):
+      self.status_url = res['status_url']
     else:
-      self.status_url = '{0}/{1}/status'.format(self.connect.url, self.connect.version)
-      self.error = res['error']
+      self.status_url = self.main_status_url
+      self.error = res.get('error')
       self.message = res.get('message')
 
   def _status(self):
     response = self.connect.post(self.status_url, dict(task_tokens=self.task_token))
-    if not response['error']:
+    status = None
+
+    if response['error'] == ERROR_BAD_TOKENS:
+      raise ValueError('Bad token: ' + str(self.task_token))
+
+    if 'statuses' in response and self.task_token in response['statuses']:
+      status = response['statuses'][self.task_token]
+
+    if not status and self.status_url != self.main_status_url:
+      self.status_url = self.main_status_url
+      response = self.connect.post(self.status_url, dict(task_tokens=self.task_token))
+      if 'statuses' in response and self.task_token in response['statuses']:
         status = response['statuses'][self.task_token]
-        if not status:
-          status = self._status2()
-        return status
-    else:
-      status = self._status2()
-      return status
+
+    if status and 'status_url' in status:
+      self.status_url = status['status_url']
+
+    return status
 
 
-  def _status2(self):
-    response = self.connect.request('status', {'task_tokens[]': self.task_token})
-    if not response['error']:
-      res = response['statuses'][self.task_token]
-      if res:
-        return res
-      else:
-        return dict(error=True, message='Error getting status')
-    else:
-      return response
+  # def _status2(self):
+  #   response = self.connect.request('status', {'task_tokens[]': self.task_token})
+  #   if not response['error']:
+  #     res = response['statuses'][self.task_token]
+  #     if res:
+  #       return res
+  #     else:
+  #       return dict(error=True, message='Error getting status')
+  #   else:
+  #     return response
 

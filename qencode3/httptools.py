@@ -12,10 +12,11 @@ class Http(object):
 
   def _call_server(self, url, post_data):
     if not url:
-      response = dict(error=True, message='AttributeError: not URL')
+      response = dict(error=True, message='AttributeError: Bad URL: ' + str(url))
       return json.dumps(response)
     data = urlencode(post_data).encode("utf-8")
     request = urllib2.Request(url, data)
+    #print('call_server: ', url, data)
     try:
       res = urllib2.urlopen(request)
     except urllib2.HTTPError as e:
