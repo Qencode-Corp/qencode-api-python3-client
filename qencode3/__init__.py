@@ -29,7 +29,11 @@ def x265_video_codec():
 
 from . exeptions import QencodeClientException, QencodeTaskException
 
-__version__ = "0.9.26"
+from . tools import generate_aws_signed_url
+
+
+
+__version__ = "0.9.27"
 __status__ = "Beta"
 __author__ = "Qencode"
 
