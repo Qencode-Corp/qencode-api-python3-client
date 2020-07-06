@@ -1,33 +1,32 @@
 ## qencode-api-python3-client
 
-
 **install sdk libraries from github**
 
-````
+```sh
 cd your-workspace-folder
 git clone https://github.com/qencode-dev/qencode-api-python3-client
 cd qencode-api-python3-client
 pip install -r requirements.txt
 python setup.py install
-````
+```
+
 **install from pip**
 
-````
-sudo pip install qencode3
-````
+```sh
+pip install qencode3
+```
 
 **Usage**
 
-````
-import qencode
+```python
+import qencode3
 
-client = qencode.client(API_KEY)
+client = qencode3.client(API_KEY)
 client.create()
 
 task = client.create_task()
 task.start(TRANSCODING_PROFILEID, VIDO_URL)
-
-````
+```
 
 **Documentation**
 
@@ -40,31 +39,34 @@ Here you will find examples of Qencode solutions using the latest version of pyt
 Key features of encoding your videos:
 
 Output Formats
- * HLS 
- * MPEG-DASH 
- * MP4 
- * MXF 
- * WebM
+
+- HLS
+- MPEG-DASH
+- MP4
+- MXF
+- WebM
 
 Codecs
- * H.264 (AVC1) 
- * H.265 (HEVC) 
- * VP9 
- * VP8 
- * AV1 
- * MPEG-2
+
+- H.264 (AVC1)
+- H.265 (HEVC)
+- VP9
+- VP8
+- AV1
+- MPEG-2
 
 Input Formats
- * MP4 
- * AVI 
- * MOV 
- * MKV 
- * HLS 
- * MPEG‑2 (TS & PS) 
- * MXF 
- * ASF 
- * ProRes 
- * XDCAM 
- * DNx 
- * FLV 
- * ...and many more
+
+- MP4
+- AVI
+- MOV
+- MKV
+- HLS
+- MPEG‑2 (TS & PS)
+- MXF
+- ASF
+- ProRes
+- XDCAM
+- DNx
+- FLV
+- ...and many more
