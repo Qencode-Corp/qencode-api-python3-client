@@ -27,6 +27,9 @@ client.create()
 task = client.create_task()
 task.start(TRANSCODING_PROFILEID, VIDO_URL)
 
+#getting video metadata:
+metadata = client.get_metadata(VIDEO_URL)
+
 ````
 
 **Documentation**
