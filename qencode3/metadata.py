@@ -1,17 +1,20 @@
-from . task import *
+from .task import *
 from qencode3 import QencodeTaskException
 import urllib.request as urllib2
 
-class Metadata(Task):
 
+class Metadata(Task):
     def get(self, uri):
-        params = """
+        params = (
+            """
             {"query": {
               "source": "%s",
               "format": [ {"output": "metadata", "metadata_version": "4.1.5"} ]
               }
             }
-            """ % uri
+            """
+            % uri
+        )
         self.custom_start(params)
         while True:
             status = self.status()
@@ -34,5 +37,3 @@ class Metadata(Task):
         data = urllib2.urlopen(url).read()
 
         return data
-
-
