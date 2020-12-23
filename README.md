@@ -123,3 +123,6 @@ Input Formats
  * DNx 
  * FLV 
  * ...and many more
+ 
+  ## Copyright
+  Copyright 2021 Qencode, Inc.
