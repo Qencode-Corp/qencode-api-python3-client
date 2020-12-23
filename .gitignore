@@ -8,6 +8,8 @@
 .cache/
 .vscode/
 .idea/
-
+venv/
+build/
+dist/
 
 

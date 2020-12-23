@@ -15,11 +15,25 @@ python setup.py install
 ````
 import qencode
 
+params = """
+{"query": {
+  "source": "https://qencode.com/static/1.mp4",
+  "format": [
+    {
+      "output": "mp4",
+      "size": "320x240",
+      "video_codec": "libx264"
+    }
+  ]
+  }
+}
+
 client = qencode.client(API_KEY)
 client.create()
 
 task = client.create_task()
-task.start(TRANSCODING_PROFILEID, VIDO_URL)
+task.custom_start(params)
+
 
 ````
 

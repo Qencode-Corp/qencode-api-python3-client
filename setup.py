@@ -13,7 +13,7 @@ with open('LONG_DESCRIPTION.md') as f:
 
 setup(
     name='qencode3',
-    version='0.9.30',
+    version='1.0.1',
     description="Qencode client library to easily setup a working solution using Python v3.x.",
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -23,7 +23,7 @@ setup(
     author_email='team@qencode.com',
     license='proprietary',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Build Tools',
         'License :: Other/Proprietary License',
