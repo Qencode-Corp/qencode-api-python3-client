@@ -35,7 +35,7 @@ FORMAT.output = "advanced_hls"
 FORMAT.destination = DESTINATION
 
 #replace with a link to your input video
-params.source = 'https://qencode.com/static/1.mp4'
+params.source = 'https://nyc3.s3.qencode.com/qencode/bbb_30s.mp4'
 params.format = [FORMAT]
 
 def start_encode():
