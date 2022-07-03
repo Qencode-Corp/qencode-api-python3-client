@@ -82,10 +82,6 @@ source_url = generate_aws_signed_url(region, bucket, object_key, access_key, sec
 
 Documentation is available at <https://docs.qencode.com>
 
-**Documentation**
-
-Documentation is available at <https://docs.qencode.com>
-
 **Description**
 
 Here you will find examples of Qencode solutions using the latest version of python. Some popular examples include launching [video encoding](https://cloud.qencode.com/) jobs through the API, basic testing functionality, and code developed to exhibit a wide range of features that we offer. Please send over any ideas you have to help us improve our solution and continue to provide you with the easiest transcoding solutions on the market.
