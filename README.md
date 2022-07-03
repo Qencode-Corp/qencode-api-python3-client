@@ -13,7 +13,7 @@ python setup.py install
 **install from pip**
 
 ````
-sudo pip install qencode3
+sudo pip3 install qencode3
 ````
 
 **Usage**
@@ -38,8 +38,6 @@ QUERY = """
 """
 
 client = qencode3.client(API_KEY)
-client.create()
-
 task = client.create_task()
 task.custom_start(QUERY)
 ````
